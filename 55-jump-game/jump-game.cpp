@@ -1,16 +1,19 @@
 class Solution {
 public:
-    bool f(vector<int>& nums,int i,int n,unordered_set<int>&s){
-        if(i>=n-1)return true;
-        if(s.count(i))return false;
-        s.insert(i);
-        for(int c=1;c<=nums[i];c++){
-            if(f(nums,i+c,n,s))return true;
-        }
-        return false;
-    }
+    
     bool canJump(vector<int>& nums) {
-        unordered_set<int>s;
-        return f(nums,0,nums.size(),s);
+        int prev = 0;
+        
+        for(int i = 0; i < nums.size() - 1; i++)
+        {
+            int current = max(nums[i], prev - 1);
+            
+            if(current == 0)
+                return false;
+            
+            prev = current;
+        }
+        
+        return true;
     }
 };
